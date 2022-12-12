@@ -10,9 +10,11 @@ default: &default
 development:
   <<: *default
   database: trading_app_postgresql
+
 test:
   <<: *default
   database: trading_app_test
+  
 production:
   <<: *default
   database: trading_app_prod

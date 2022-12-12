@@ -1,0 +1,14 @@
+<h1>Stock App</h1>
+<% if current_user %>
+  <p>Hello <%= current_user.email %>!</p>
+  <p>You are a [<%= current_user.role.capitalize %>]</p>
+  <% if current_user.admin? %>
+    There are currently <%= User.count %> registered users 
+  <% end %>
+  <p> You have sucessfully authenticated your account</p>
+  <%= link_to "Sign out", destroy_user_session_path, 'data-turbo-method': :delete %>
+<% else %>
+  <p>You are not signed in</p>
+  <%= link_to "Sign up!", new_user_registration_path %>
+  <%= link_to "Login", new_user_session_path %>
+<% end %>
