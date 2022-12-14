@@ -1,0 +1,27 @@
+<% if @users.empty? %>
+  No current users
+<% else %>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th> 
+      <th>Name</th> 
+      <td>Role</td>
+      <td>Read</td>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @users.each do |user| %>
+    <tr>
+    <td><%= user.id %> </td>
+    <td><%= user.email %> </td>
+    <td><%= user.role %> </td>
+    <td><%= link_to "Show user details", user_path(user) %></td>
+    </tr>
+  <% end %>
+<% end %>
+  </tbody>
+</table>
+
+<%= link_to "Back", root_path%>
