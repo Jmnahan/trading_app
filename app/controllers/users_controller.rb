@@ -13,6 +13,15 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def create
+    @user = User.new(create_user_params)
+
+    if @user.save
+      redirect_to users_path
+    end
+
+  end
+
   def edit
     @user = User.find params[:id]
   end
@@ -20,12 +29,18 @@ class UsersController < ApplicationController
   def update
     @user = User.find params[:id]
 
-    if @user.role_type = 'admin'
-      @user.update(user_params)
-      redirect_to root_path
-    else
-      render :edit
+    if current_user.role = 'admin'
+      if @user.update(create_user_params)
+        redirect_to users_path
+      else
+        render :edit
+      end
     end
   end
   private
+  
+  def create_user_params
+    params.require(:user).permit(:email, :password, :confimation_password)
+  end
+
 end
