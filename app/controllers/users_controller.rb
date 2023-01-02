@@ -37,6 +37,17 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  def notifications
+    @users = User.pending
+  end
+
+  def approve_user
+    @user = User.find params[:id]
+
+    @user.approved!
+    redirect_to notifications_path
+  end  
   private
   
   def create_user_params

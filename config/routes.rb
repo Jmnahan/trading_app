@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   scope "home" do
     resources :users
   end
+  scope "admin" do
+    get '/notifications', to: "users#notifications", as: 'notifications'
+    put '/users/:id/approve', to:"users#approve_user", as: 'approve_user' 
+  end
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
