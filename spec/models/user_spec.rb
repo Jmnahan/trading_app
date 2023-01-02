@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   before :each do
     @user = build(:user, role: "buyer")
+    @user.skip_confirmation!
   end
 
   context 'user role on create' do
