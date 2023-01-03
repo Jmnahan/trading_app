@@ -1,0 +1,7 @@
+<p>There are currently <%= @pending_users.count %> pending user(s)</p>
+<% @pending_users.each do |user| %>
+  <div>
+    <%= user.email %>
+    <%= button_to('Approve', admin_approve_path(user, status: 'approved'), method: :patch)%>
+  </div>
+<% end %>
