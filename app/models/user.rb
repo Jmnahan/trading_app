@@ -5,18 +5,18 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
 
   enum role: [:buyer, :admin]
   enum status: [:pending, :approved]
-
-  private
 
   def set_default_role
     self.role ||= :buyer 
   end
 
+
   def set_status
     self.status ||= :pending
   end
+  
 end
