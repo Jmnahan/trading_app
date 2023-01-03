@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @users = User.where.not(role: "admin")
+    @users = User.where.not(role: 'admin')
   end
 
   def new
@@ -15,7 +15,6 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to users_path
     end
-
   end
 
   def show
@@ -37,10 +36,21 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  def pending
+    @pending_users = User.where(status: 'pending')
+  end
+
+  def approve
+    @user = User.find params[:id]
+    @user.update(status: params[:status])
+    redirect_to users_path
+  end
+
   private
   
   def create_user_params
-    params.require(:user).permit(:email, :password, :confimation_password)
+    params.require(:user).permit(:email, :password, :confimation_password, :role, :status,)
   end
 
 end

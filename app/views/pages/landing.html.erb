@@ -5,6 +5,7 @@
   <% if current_user.admin? %>
     <%= link_to "Show all users", users_path %>
     <%= link_to "Create user", new_user_path %>
+    <%= link_to "Pending users", admin_pending_path %>
   <% end %>
   <p> You have sucessfully authenticated your account</p>
   <%= link_to "Sign out", destroy_user_session_path, 'data-turbo-method': :delete %>
