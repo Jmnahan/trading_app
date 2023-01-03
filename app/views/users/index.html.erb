@@ -6,7 +6,8 @@
     <tr>
       <th>ID</th> 
       <th>Name</th> 
-      <td>Role</td>
+      <th>Role</th>
+      <th>Role</th>
       <td>Read</td>
     </tr>
   </thead>
@@ -17,6 +18,7 @@
     <td><%= user.id %> </td>
     <td><%= user.email %> </td>
     <td><%= user.role %> </td>
+    <td><%= user.status %> </td>
     <td><%= link_to "Show user details", user_path(user) %></td>
     </tr>
   <% end %>

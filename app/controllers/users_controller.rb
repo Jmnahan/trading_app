@@ -2,11 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @users = User.where.not(role: "admin")
-  end
-
-  def show
-    @user = User.find params[:id]
+    @users = User.where.not(role: 'admin')
   end
 
   def new
@@ -19,7 +15,10 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to users_path
     end
+  end
 
+  def show
+    @user = User.find params[:id]
   end
 
   def edit
@@ -38,12 +37,14 @@ class UsersController < ApplicationController
     end
   end
 
-  def notifications
-    @users = User.pending
+  def pending
+    @pending_users = User.where(status: 'pending')
   end
 
-  def approve_user
+  def approve
     @user = User.find params[:id]
+    @user.update(status: params[:status])
+    redirect_to users_path
     
     if @user.approved! 
       AdminMailer.with(user: @user).approve_user_email.deliver_later
@@ -51,11 +52,12 @@ class UsersController < ApplicationController
     else
       redirect_to notifications_path, alert: "something wrong, please call administrator"
     end 
-  end  
+  end
+
   private
   
   def create_user_params
-    params.require(:user).permit(:email, :password, :confimation_password)
+    params.require(:user).permit(:email, :password, :confimation_password, :role, :status,)
   end
 
 end
