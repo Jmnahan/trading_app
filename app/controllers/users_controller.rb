@@ -44,7 +44,6 @@ class UsersController < ApplicationController
   def approve
     @user = User.find params[:id]
     @user.update(status: params[:status])
-    redirect_to users_path
     
     if @user.approved! 
       AdminMailer.with(user: @user).approve_user_email.deliver_later
