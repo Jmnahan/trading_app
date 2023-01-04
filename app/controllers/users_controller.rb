@@ -45,6 +45,13 @@ class UsersController < ApplicationController
     @user = User.find params[:id]
     @user.update(status: params[:status])
     redirect_to users_path
+    
+    if @user.approved! 
+      AdminMailer.with(user: @user).approve_user_email.deliver_later
+      redirect_to notifications_path, notice: "#{@user.email} has been approved"
+    else
+      redirect_to notifications_path, alert: "something wrong, please call administrator"
+    end 
   end
 
   private
