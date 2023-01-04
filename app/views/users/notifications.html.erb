@@ -1,6 +1,0 @@
-<%@users.each do |user|%>
-    <p>
-    <%= user.email %>
-    <%= button_to 'Approve', approve_user_path(user), method: :put %>
-    </p>
-<% end %>
