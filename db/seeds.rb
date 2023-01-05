@@ -8,13 +8,14 @@
 
 User.destroy_all
 
+admin = User.new email: 'admin1@email.com', password: 'password', role: :admin
+admin.skip_confirmation!
+admin.save
+
+client = Iex.client
+
 10.times do |n|
     user = User.new email: "user#{n}@email.com", password: 'password'
     user.skip_confirmation!
     user.save
 end
-
-admin = User.new email: 'admin1@email.com', password: 'password', role: :admin
-admin.skip_confirmation!
-admin.save
-
