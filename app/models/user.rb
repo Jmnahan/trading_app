@@ -10,10 +10,11 @@ class User < ApplicationRecord
   enum role: [:buyer, :admin]
   enum status: [:pending, :approved]
 
+  private
+
   def set_default_role
     self.role ||= :buyer 
   end
-
 
   def set_status
     self.status ||= :pending
