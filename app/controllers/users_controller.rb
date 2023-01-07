@@ -37,6 +37,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def view_transactions 
+    @orders = Order.includes(:order_action,:user).all.order(:created_at => :DESC)
+    
+  end
+
   def pending
     @pending_users = User.where(status: 'pending')
   end
