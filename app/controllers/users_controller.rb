@@ -53,6 +53,11 @@ class UsersController < ApplicationController
     end 
   end
 
+  def portfolio
+    @user = User.find params[:id]
+    @stocks = @user.stocks
+  end
+
   private
   
   def create_user_params

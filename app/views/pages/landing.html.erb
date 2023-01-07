@@ -7,6 +7,7 @@
     <%= link_to "Create user", new_user_path %>
     <%= link_to "Pending users", admin_pending_path %>
   <% end %>
+  <%= link_to "Portfolio", user_portfolio_path(current_user) %>
   <p> You have sucessfully authenticated your account</p>
   <%= link_to "Sign out", destroy_user_session_path, 'data-turbo-method': :delete %>
 <% else %>
