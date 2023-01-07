@@ -12,10 +12,18 @@ admin = User.new email: 'admin1@email.com', password: 'password', role: :admin
 admin.skip_confirmation!
 admin.save
 
-client = Iex.client
+Iex.most_active_stocks.each do |stock|
+  Stock.create name: stock["company_name"], unit_price: stock["latest_price"]
+end
+
+stocks = Stock.all
 
 10.times do |n|
-    user = User.new email: "user#{n}@email.com", password: 'password'
-    user.skip_confirmation!
-    user.save
+  user = User.new email: "user#{n}@email.com", password: 'password'
+  user.skip_confirmation!
+  user.save
+
+  3.times do
+    Order.create user: user, stock: stocks.sample, quantity: rand(1.5..3.0), order_action: [:buy, :sell].sample
+  end
 end
