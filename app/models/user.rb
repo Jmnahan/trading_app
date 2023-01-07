@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :orders
+  has_many :stocks, through: :orders
   after_initialize :set_default_role, :if => :new_record?
   before_validation :set_status, on: :create
   
@@ -20,7 +22,7 @@ class User < ApplicationRecord
   end
 
   def set_status
-    self.status ||= :pending
+    self.status = admin? ? :approved : :pending
   end
   
 end
