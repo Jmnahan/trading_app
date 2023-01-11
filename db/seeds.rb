@@ -13,7 +13,7 @@ admin.skip_confirmation!
 admin.save
 
 Iex.most_active_stocks.each do |stock|
-  Stock.create name: stock["company_name"], unit_price: stock["latest_price"]
+  Stock.create name: stock['company_name'], symbol: stock['symbol']
 end
 
 stocks = Stock.all
@@ -22,8 +22,17 @@ stocks = Stock.all
   user = User.new email: "user#{n}@email.com", password: 'password'
   user.skip_confirmation!
   user.save
+  
+  5.times do
 
-  3.times do
-    Order.create user: user, stock: stocks.sample, quantity: rand(1.5..3.0), order_action: [:buy, :sell].sample
+    stock = stocks.sample
+    quote = Iex.client.quote stock.symbol
+    percent_change = quote['change_percent_s']
+    unit_price = quote['latest_price']
+    fund = rand(1..unit_price)
+    quantity = fund / unit_price
+
+    Order.create user:, stock: stocks.sample, fund:, percent_change:, order_action: [:buy, :sell].sample,
+    unit_price:, quantity:
   end
 end

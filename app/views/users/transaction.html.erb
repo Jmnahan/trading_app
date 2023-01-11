@@ -1,11 +1,25 @@
-<h1>Transaction History</h1>
-<hr>
+<h2>Recent Transactions:</h2>
 <table>
- <tr>
-    <th>Company</th>
-    <th>Shares</th>
-    <th>Price</th>
-    <th>Type</th>
-    <th>User</th>
- </tr>
+  <thead>
+    <tr>
+      <th>Stock</th> 
+      <th>Quantity</th> 
+      <th>Price</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @user_orders.each do |order| %>
+    <tr>
+    <td><%= order.stock.symbol %> </td>
+    <td><%= order.quantity.to_d.truncate(2) %> </td>
+    <td>$ <%= order.unit_price %> </td>
+    <td><%= order.order_action %> </td>
+    </tr>
+  <% end %>
+  </tbody>
 </table>
+<br>
+
+<%= link_to "Back", root_path%>
+
