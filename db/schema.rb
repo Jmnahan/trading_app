@@ -31,6 +31,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_07_024549) do
   create_table "stocks", force: :cascade do |t|
     t.string "name"
     t.string "symbol"
+    t.string "percent_change"
+    t.float "unit_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

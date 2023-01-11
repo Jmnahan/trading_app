@@ -13,7 +13,11 @@ admin.skip_confirmation!
 admin.save
 
 Iex.most_active_stocks.each do |stock|
-  Stock.create name: stock['company_name'], symbol: stock['symbol']
+  Stock.create(name: stock['company_name'],
+    symbol: stock['symbol'],
+    percent_change: stock['change_percent_s'],
+    unit_price: stock['latest_price']
+  )
 end
 
 stocks = Stock.all

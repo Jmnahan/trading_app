@@ -3,6 +3,8 @@ class CreateStocks < ActiveRecord::Migration[7.0]
     create_table :stocks do |t|
       t.string :name
       t.string :symbol
+      t.string :percent_change
+      t.float :unit_price
 
       t.timestamps
     end
