@@ -17,8 +17,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_07_024549) do
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "stock_id", null: false
-    t.float "quantity", null: false
     t.integer "order_action", null: false
+    t.string "percent_change"
+    t.float "fund", null: false
+    t.float "unit_price"
+    t.float "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["stock_id"], name: "index_orders_on_stock_id"
@@ -27,7 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_07_024549) do
 
   create_table "stocks", force: :cascade do |t|
     t.string "name"
-    t.float "unit_price"
+    t.string "symbol"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

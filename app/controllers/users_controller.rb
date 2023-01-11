@@ -53,9 +53,14 @@ class UsersController < ApplicationController
     end 
   end
 
-  def portfolio
+  def transaction
     @user = User.find params[:id]
-    @stocks = @user.stocks
+
+    if @user.role = "buyer"
+      @user_orders = @user.orders
+    else
+      @user_orders = Order.all
+    end
   end
 
   private
