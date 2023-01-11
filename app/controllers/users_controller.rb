@@ -37,6 +37,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def view_transactions 
+    @orders = Order.includes(:order_action,:user).all.order(:created_at => :DESC)
+    
+  end
+
   def pending
     @pending_users = User.where(status: 'pending')
   end
@@ -53,13 +58,23 @@ class UsersController < ApplicationController
     end 
   end
 
+  def buy_order
+    
+  end
+
+  def sell_order
+
+  end
+
   def transaction
     @user = User.find params[:id]
 
-    if @user.role = "buyer"
-      @user_orders = @user.orders
-    else
-      @user_orders = Order.all
+    if @user.role == "buyer"
+      @user_orders = current_user.orders
+    end
+
+    if @user.role == "admin"
+      @user_orders = Order.all.order(created_at: :desc)
     end
   end
 
