@@ -12,6 +12,22 @@ class User < ApplicationRecord
   enum role: [:buyer, :admin]
   enum status: [:pending, :approved]
 
+  def funds_sum
+    orders.sum(:fund)
+  end
+
+  def current_holdings
+    orders.each_with_object({}) do |g,h|
+      h.update(Stock.find(g[:stock_id]).symbol=>g) do |_,o,n|
+      { unit_price: n[:unit_price],
+        percent_change: n[:percent_change],
+        fund: o[:fund]+n[:fund], 
+        quantity: o[:quantity]+n[:quantity] 
+      }
+      end
+    end
+  end
+
   private
 
   def set_default_role

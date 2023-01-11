@@ -1,15 +1,46 @@
 <h1>Stock App</h1>
 <% if current_user %>
-  <p>Hello <%= current_user.email %>!</p>
+   <p> You have sucessfully authenticated your account</p>
   <p>You are a [<%= current_user.role.capitalize %>]</p>
   <% if current_user.admin? %>
     <%= link_to "Show all users", users_path %>
     <%= link_to "Create user", new_user_path %>
     <%= link_to "Pending users", admin_pending_path %>
+    <%= link_to "Transactions", user_transaction_path(current_user) %>
+    <%= link_to "Sign out", destroy_user_session_path, 'data-turbo-method': :delete %>
+  <% else current_user.buyer? %>
+  <p>Hello, <%= current_user.email %></p>
+  <p>User id: <%= current_user.id %></p>
+  <p>User type:<%= current_user.role.capitalize %></p>
+    <div>
+      <h2>Holdings:</h2>
+      <h3>Total: $ <%= current_user.funds_sum.to_d.truncate(2) %></h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Symbol</th> 
+            <th>Quantity</th> 
+            <th>Amount</th> 
+            <th>Latest Price</th> 
+            <th>Change</th> 
+          </tr>
+        </thead>
+        <tbody>
+          <% current_user.current_holdings.each do |k, v| %>
+            <tr>
+              <td><%= k %></td>
+              <td><%= v[:quantity].to_d.truncate(2) %></td>
+              <td>$ <%= v[:fund].to_d.truncate(2) %></td>
+              <td><%= v[:unit_price].to_d.truncate(2) %></td>
+              <td><%= v[:percent_change] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <%= link_to "Transactions", user_transaction_path(current_user) %>
+    <%= link_to "Sign out", destroy_user_session_path, 'data-turbo-method': :delete %>
   <% end %>
-  <%= link_to "Portfolio", user_portfolio_path(current_user) %>
-  <p> You have sucessfully authenticated your account</p>
-  <%= link_to "Sign out", destroy_user_session_path, 'data-turbo-method': :delete %>
 <% else %>
   <p>You are not signed in</p>
   <%= link_to "Sign up!", new_user_registration_path %>
