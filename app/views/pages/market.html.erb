@@ -1,0 +1,26 @@
+<div>
+  <h2>Market</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th> 
+        <th>Symbol</th> 
+        <th>Latest Price</th> 
+        <th>Percent Change</th> 
+      </tr>
+    </thead>
+    <tbody>
+    <% @stocks.each do |stock| %>
+      <tr>
+        <td><%= stock.name %></td>
+        <td><%= stock.symbol %></td>
+        <td><%= stock.unit_price %></td>
+        <td><%= stock.percent_change %></td>
+        <td><%= link_to "Trade", root_path %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<br>
+<%= link_to "Back", root_path%>

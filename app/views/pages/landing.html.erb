@@ -39,6 +39,7 @@
       </table>
     </div>
     <%= link_to "Transactions", user_transaction_path(current_user) %>
+    <%= link_to "Market", pages_market_path %>
     <%= link_to "Sign out", destroy_user_session_path, 'data-turbo-method': :delete %>
   <% end %>
 <% else %>
