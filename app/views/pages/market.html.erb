@@ -16,7 +16,7 @@
         <td><%= stock.symbol %></td>
         <td><%= stock.unit_price %></td>
         <td><%= stock.percent_change %></td>
-        <td><%= link_to "Trade", root_path %></td>
+        <td><%= link_to "Trade", new_stock_order_path(stock) %></td>
       </tr>
     <% end %>
     </tbody>
