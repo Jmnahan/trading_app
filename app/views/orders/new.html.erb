@@ -1,0 +1,31 @@
+<h2><%= @order.stock.name %> (<%= @order.stock.symbol %>)</h2>
+<p>Units owned: <%= current_user.current_unit_owned(@stock.symbol) %></p>
+<p>Latest price: $ <%= @order.unit_price %></p>
+
+<h2>Buy Stock</h2>
+<%= form_with(model: @order, url: stock_orders_path(@stock), method: :post) do |f| %>
+  <div>
+    <%= f.label :amount %>
+    <%= f.number_field :amount %>
+    <%= f.hidden_field :transaction_type, value: "buy" %>
+  </div>
+  <br>
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>
+<br>
+<h2>Sell Stock</h2>
+<%= form_with(model: @order, url: stock_orders_path(@stock), method: :post) do |f| %>
+  <div>
+    <%= f.label :amount %>
+    <%= f.number_field :amount %>
+    <%= f.hidden_field :transaction_type, value: "sell" %>
+  </div>
+  <br>
+   <div>
+    <%= f.submit %>
+  </div>
+<% end %>
+<br>
+<%= link_to "Back", root_path%>

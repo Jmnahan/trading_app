@@ -19,6 +19,10 @@ class User < ApplicationRecord
     orders.sum(:fund)
   end
 
+  def current_unit_owned(symbol)
+    orders.group_by{ |order| order.stock.symbol }[symbol]&.sum(&:quantity) || 0
+  end
+
   def current_holdings
     orders.each_with_object({}) do |g,h|
       h.update(Stock.find(g[:stock_id]).symbol=>g) do |_,o,n|

@@ -10,6 +10,11 @@ Rails.application.routes.draw do
     patch '/users/:id/approve', to: 'users#approve', as: 'admin_approve'
     get '/users/:id/transaction', to: 'users#transaction', as: 'user_transaction'
   end
+
+  resources :stocks do
+    resources :orders
+  end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
