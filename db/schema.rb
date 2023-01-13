@@ -20,8 +20,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_07_024549) do
     t.integer "order_action", null: false
     t.string "percent_change"
     t.float "fund", null: false
-    t.float "unit_price"
-    t.float "quantity"
+    t.float "unit_price", null: false
+    t.float "quantity", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["stock_id"], name: "index_orders_on_stock_id"

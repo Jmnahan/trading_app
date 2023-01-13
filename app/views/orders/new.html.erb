@@ -6,21 +6,21 @@
 <%= form_with(model: @order, url: stock_orders_path(@stock), method: :post) do |f| %>
   <div>
     <%= f.label :amount %>
-    <%= f.number_field :amount %>
-    <%= f.hidden_field :transaction_type, value: "buy" %>
+    <%= f.number_field :order_amount, step: 'any' %>
+    <%= f.hidden_field :order_action, value: "buy" %>
   </div>
   <br>
   <div>
     <%= f.submit %>
   </div>
-<% end %>
+<%end %>
 <br>
 <h2>Sell Stock</h2>
 <%= form_with(model: @order, url: stock_orders_path(@stock), method: :post) do |f| %>
   <div>
     <%= f.label :amount %>
-    <%= f.number_field :amount %>
-    <%= f.hidden_field :transaction_type, value: "sell" %>
+    <%= f.number_field :order_amount, step: 'any' %>
+    <%= f.hidden_field :order_action, value: "sell" %>
   </div>
   <br>
    <div>
