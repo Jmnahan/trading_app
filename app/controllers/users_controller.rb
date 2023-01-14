@@ -52,18 +52,10 @@ class UsersController < ApplicationController
     
     if @user.approved! 
       AdminMailer.with(user: @user).approve_user_email.deliver_later
-      redirect_to notifications_path, notice: "#{@user.email} has been approved"
+      redirect_to root_path, notice: "#{@user.email} has been approved"
     else
-      redirect_to notifications_path, alert: "something wrong, please call administrator"
+      redirect_to root_path, alert: "something wrong, please call administrator"
     end 
-  end
-
-  def buy_order
-    
-  end
-
-  def sell_order
-
   end
 
   def transaction
