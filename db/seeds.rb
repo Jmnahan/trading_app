@@ -23,9 +23,9 @@ end
 stocks = Stock.all
 
 10.times do |n|
-  user = User.new email: "user#{n}@email.com", password: 'password'
+  user = User.new email: "user#{n}@email.com", password: 'password', status: 'approved'
   user.skip_confirmation!
-  user.save
+  user.save(validate: false)
   
   5.times do
 
@@ -36,7 +36,7 @@ stocks = Stock.all
     fund = rand(1..unit_price)
     quantity = fund / unit_price
 
-    Order.create user:, stock: stocks.sample, fund:, percent_change:, order_action: [:buy, :sell].sample,
-    unit_price:, quantity:
+    order = Order.new(user:, stock: stocks.sample, fund:, percent_change:, order_action: [:buy, :sell].sample,
+    unit_price:, quantity:).save(validate: false)
   end
 end

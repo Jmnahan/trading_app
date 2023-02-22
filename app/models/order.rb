@@ -14,7 +14,7 @@ class Order < ApplicationRecord
   end
 
   def sell_amount_true
-    return if order_action == buy?
+    return if buy?
 
     user_quantity = user.current_unit_owned(stock.symbol)
     return if fund <= user_quantity * unit_price

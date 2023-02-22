@@ -27,7 +27,7 @@ class User < ApplicationRecord
     orders.each_with_object({}) do |g,h|
       h.update(Stock.find(g[:stock_id]).symbol=>g) do |_,o,n|
       { unit_price: n[:unit_price],
-        percent_change: n[:percent_change],
+        percent_change: o[:percent_change],
         fund: o[:fund]+n[:fund], 
         quantity: o[:quantity]+n[:quantity] 
       }
